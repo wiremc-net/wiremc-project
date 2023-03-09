@@ -32,6 +32,13 @@
             <version>1.18.26</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.atomic</groupId>
+            <artifactId>commons</artifactId>
+            <version>VERSION</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/resources/commons.jar</systemPath>
+        </dependency>
     </dependencies>
 
 </project>
