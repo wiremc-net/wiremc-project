@@ -8,6 +8,7 @@ import org.bson.Document;
 
 import java.util.Objects;
 import java.util.UUID;
+import java.util.concurrent.Future;
 
 public final class SimpleCoreplayer implements Coreplayer {
 
@@ -46,16 +47,16 @@ public final class SimpleCoreplayer implements Coreplayer {
     }
 
     @Override
-    public Coreplayer push() {
-        Core.getInstance().getExecutor().submit(() -> {
+    public Future<Coreplayer> push() {
+        return Core.getInstance().getExecutor().submit(() -> {
             Core.getInstance()
                     .getCoreplayerRegistry()
                     .getDatabaseCollection()
                     .updateOne(
                             Filters.eq("uniqueID", this.uniqueID.toString()), new Document("$set", this.object)
                     );
+            return this;
         });
-        return this;
     }
 
     @Override
